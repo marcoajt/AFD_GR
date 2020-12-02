@@ -29,8 +29,16 @@ public class AFD_GR {
         // TODO code application logic here
         AFD meuAFD = new AFD();
 
-
         meuAFD.iniciaAFD();
+        
+        
+        Conversion dados = new Conversion();
+        
+        dados.setAlfabeto(meuAFD.getAlf());
+        dados.setIni(meuAFD.getIni());
+        dados.setFim(meuAFD.getEstfim());
+        dados.setDados(meuAFD.getMat());
+        dados.transform();
         
         
         

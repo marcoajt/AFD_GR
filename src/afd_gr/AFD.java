@@ -29,15 +29,19 @@ public class AFD {
     private   int j=0;
     private   int i = 0;    
     private   int aux;      
-    //private   char mat[][];//o processo para ler a palavra
+    private   char mataux[][];//o processo para ler a palavra
     
     private boolean rec;
+    
+    //Conversion dados = new Conversion();
       
     // DADOS INSERIDOS PELO USUARIO
     public void iniciaAFD(){ // Função para a configuração do Autômato Finito Determinístico
         System.out.println("Digite o alfabeto?");
         this.alfabeto = in.nextLine();
         this.alf = this.alfabeto.toCharArray();
+        
+        //dados.setAlfabeto(alf);
                
                     // ESTADO INICIAL EX: A
         System.out.println("Digite o estado inicial?");
@@ -62,7 +66,9 @@ public class AFD {
         char processo[][];// Matriz gerada para passar como paramentro na função Reconhecer.
         
         processo = organiza(transicao);//Retorna a matriz gerada na função organiza.
+        
         Reconhecer(pal,processo);
+        mataux = processo;
     }
     
     
@@ -167,4 +173,26 @@ public class AFD {
                  }
         
     }
+
+    public char[] getAlf() {
+        return alf;
+    }
+
+    public char getFim() {
+        return fim;
+    }
+
+    public char[] getEstfim() {
+        return estfim;
+    }
+
+    public char getIni() {
+        return ini;
+    }
+
+    public char[][] getMat() {
+        return mataux;
+    }
+    
+    
 }
