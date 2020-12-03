@@ -16,6 +16,7 @@ public class Conversion {
     char ini;
     char [] fim;
     char [][] dados;
+    char [] est;
 
     public char[] getAlfabeto() {
         return alfabeto;
@@ -49,6 +50,10 @@ public class Conversion {
         this.dados = dados;
     }
     
+    public void setEst(char[] est) {
+        this.est = est;
+    }
+    
     public void transform(){
         System.out.println("----------DADOS----------");
         System.out.print("Alfabeto obitido:");
@@ -57,6 +62,8 @@ public class Conversion {
         System.out.println(ini);
         System.out.print("Fim: ");
         System.out.println(fim);
+        System.out.print("Estados: ");
+        System.out.println(est);
         System.out.print("Matriz de dados: ");
         for(int i = 0;i < dados.length;i++){
             System.out.println("");
@@ -66,5 +73,34 @@ public class Conversion {
         }
         System.out.println("");
         System.out.println("---------------------");
+        for(int i = 0;i < dados.length;i++){
+            System.out.println("");
+            //for(int j = 0;j < dados[0].length;j++){
+                System.out.print(dados[i][0]+" ");
+            //}
+        }
+        System.out.println("");
+        System.out.println("---------------------");
+        for(int i = 0;i < dados.length;i++){
+            System.out.println("");
+            //for(int j = 0;j < dados[0].length;j++){
+                System.out.print(dados[i][2]+" ");
+            //}
+        }
+        System.out.println("");
+        System.out.println("---------------------");
     }
+    
+    /*public char [] vetor(char [] vetor){
+        char [] v = null;
+        v[0] = vetor[0];
+        for(int i = 0;i < v.length;i++){
+            if(v[i] == vetor[i+1]){
+                System.out.println("Já tem no vetor");
+            }else{
+                v[i+1] = vetor[i+1];
+            }
+        }
+        return v;
+    }*/
 }

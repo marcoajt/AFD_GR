@@ -28,12 +28,19 @@ public class AFD_GR {
     public static void main(String[] args) {
         // TODO code application logic here
         AFD meuAFD = new AFD();
+        Scanner scan = new Scanner(System.in);
+        
+        char estado [];
+        System.out.println("Digite os estados");
+        String est = scan.nextLine();
+        estado = est.toCharArray();
 
         meuAFD.iniciaAFD();
         
         
         Conversion dados = new Conversion();
         
+        dados.setEst(estado);
         dados.setAlfabeto(meuAFD.getAlf());
         dados.setIni(meuAFD.getIni());
         dados.setFim(meuAFD.getEstfim());
@@ -44,7 +51,7 @@ public class AFD_GR {
         
         
         String argumento; //VARIAVEL USADA PARA INTERAGIR COM O USUARIO
-        Scanner scan = new Scanner(System.in); //VARIAVEL USADA PARA INTERAGIR COM O USUARIO
+        //Scanner scan = new Scanner(System.in); //VARIAVEL USADA PARA INTERAGIR COM O USUARIO
         String alfa = new String(); //VARIAVEL USADA PARA GUARDAR O ALFABETO COMPLETO CONTENDO VARIAVEIS TERMINAIS E NAO-TERMINAIS
         char cont_alfa[]; //VARIAVEL USADA PARA GUARDAR O ALFABETO COMPLETO CONTENDO VARIAVEIS TERMINAIS E NAO-TERMINAIS NO FORMATO DE VETOR
         char[] cont_regra_0; //VARIAVEL USADA PARA REALIZAR VERIFICACAO DE EXCECOES
@@ -60,8 +67,17 @@ public class AFD_GR {
 
         alfa = alfa + "&"; //DEFININDO QUE O PRIMEIRO ELEMENTO DO ALFABETO É O VAZIO
 
-        System.out.println("\nDigite a quantidade de palavras: ");  n = scan.nextInt();  cachorro.setQtd(n);
-        do{System.out.println("\nDigite [1] para inserir raizes manualmente.\nDigite [2] para inserir raizes automáticas.\nDigite: ");  automatico = scan.nextInt(); if((automatico!=1)&&(automatico!=2)){System.out.println("\nDigite valor válido!\n"+automatico);}}while((automatico!=1)&&(automatico!=2));
+        System.out.println("\nDigite a quantidade de palavras: ");  
+        n = scan.nextInt();  
+        cachorro.setQtd(n);
+        do{
+            System.out.println("\nDigite [1] para inserir raizes manualmente.\nDigite [2] para inserir raizes automáticas.\nDigite: ");  
+            automatico = scan.nextInt(); 
+            if((automatico!=1)&&(automatico!=2)){
+                System.out.println("\nDigite valor válido!\n"+automatico);
+            }
+        }while((automatico!=1)&&(automatico!=2));
+        
         System.out.println("Informe as variaveis nao-terminais \n (adicione cada uma com enter ao fim) \n digite @ para avancar: "); //INTERACAO COM O USUARIO
         argumento = scan.next();
         while (!"@".equals(argumento)) { //ENQUANTO O USUARIO NAO DIGITAR @ CONTINUARA NA INSERCAO DE VARIAVEIS NAO-TERMINAIS
