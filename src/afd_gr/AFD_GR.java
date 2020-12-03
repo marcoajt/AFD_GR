@@ -47,7 +47,8 @@ public class AFD_GR {
         dados.setDados(meuAFD.getMat());
         dados.transform();
         
-        char [] term = dados.getEst();
+        char [] nao_terminais = dados.getEst();
+        char [] terminais = dados.getAlfabeto();
         
         
         String argumento; //VARIAVEL USADA PARA INTERAGIR COM O USUARIO
@@ -101,16 +102,23 @@ public class AFD_GR {
             //argumento = scan.next();
         }*/
         
-        for(int i = 0; i < term.length;i++){
-             argumento = String.valueOf(term[i]);
+        for(int i = 0; i < nao_terminais.length;i++){
+             argumento = String.valueOf(nao_terminais[i]);
              G_R.nao_terminais.add(argumento);
              G_R.conj_regras.add(new Regras());
              alfa = alfa + argumento;
         }
         
         System.out.println("Informe as variaveis terminais \n(adicione cada uma com enter ao fim) \n digite @ para avancar: "); //INTERACAO COM O USUARIO
-        argumento = scan.next();
-        while (!"@".equals(argumento)) { //ENQUANTO O USUARIO NAO DIGITAR @ CONTINUARA NA INSERCAO DE VARIAVEIS TERMINAIS
+        //argumento = scan.next();
+        
+        for(int i = 0; i < terminais.length;i++){
+             argumento = String.valueOf(terminais[i]);
+             G_R.terminais.add(argumento);
+             alfa = alfa + argumento;
+        }
+        
+        /*while (!"@".equals(argumento)) { //ENQUANTO O USUARIO NAO DIGITAR @ CONTINUARA NA INSERCAO DE VARIAVEIS TERMINAIS
             verificador = false; //VARIAVEL TODA VEZ QUE ENTRA NESSA FUNCAO É DEFINIDA EM FALSE
             for (int x = 0; x < G_R.nao_terminais.size(); x++) { //PERCORRE TODAS NAO TERMINAIS
                 if (G_R.nao_terminais.get(x).contains(argumento)) { //COMPARA SE O USUARIO DIGITOU UMA TERMINAL IGUAL A UMA NAO-TERMINAL
@@ -135,7 +143,7 @@ public class AFD_GR {
             }
 
             argumento = scan.next();
-        }
+        }*/
 
         cont_alfa = alfa.toCharArray(); //PASSA A STRING DO ALFABETO PARA O FORMATO ARRAY
 
