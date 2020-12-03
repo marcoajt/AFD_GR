@@ -98,9 +98,11 @@ public class AFD_GR {
                 alfa = alfa + argumento; //ADICIONA A NAO TERMINAL NO ALFABETO
                 System.out.println("\nInserido com sucesso!\n"); //INTERACAO COM O USUARIO
             }
-            argumento = scan.next();
+            //argumento = scan.next();
         }
-
+        
+        
+        
         System.out.println("Informe as variaveis terminais \n(adicione cada uma com enter ao fim) \n digite @ para avancar: "); //INTERACAO COM O USUARIO
         argumento = scan.next();
         while (!"@".equals(argumento)) { //ENQUANTO O USUARIO NAO DIGITAR @ CONTINUARA NA INSERCAO DE VARIAVEIS TERMINAIS

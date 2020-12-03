@@ -17,7 +17,10 @@ public class Conversion {
     char [] fim;
     char [][] dados;
     char [] est;
-
+    
+    
+    
+    
     public char[] getAlfabeto() {
         return alfabeto;
     }
@@ -53,6 +56,12 @@ public class Conversion {
     public void setEst(char[] est) {
         this.est = est;
     }
+
+    public char[] getEst() {
+        return est;
+    }
+    
+    
     
     public void transform(){
         System.out.println("----------DADOS----------");
