@@ -47,7 +47,7 @@ public class AFD_GR {
         dados.setDados(meuAFD.getMat());
         dados.transform();
         
-        
+        char [] term = dados.getEst();
         
         
         String argumento; //VARIAVEL USADA PARA INTERAGIR COM O USUARIO
@@ -79,8 +79,8 @@ public class AFD_GR {
         }while((automatico!=1)&&(automatico!=2));
         
         System.out.println("Informe as variaveis nao-terminais \n (adicione cada uma com enter ao fim) \n digite @ para avancar: "); //INTERACAO COM O USUARIO
-        argumento = scan.next();
-        while (!"@".equals(argumento)) { //ENQUANTO O USUARIO NAO DIGITAR @ CONTINUARA NA INSERCAO DE VARIAVEIS NAO-TERMINAIS
+        //argumento = String.valueOf(term[0]);
+        /*while (!"@".equals(argumento)) { //ENQUANTO O USUARIO NAO DIGITAR @ CONTINUARA NA INSERCAO DE VARIAVEIS NAO-TERMINAIS
             verificador = false; //VARIAVEL TODA VEZ QUE ENTRA NESSA FUNCAO É DEFINIDA EM FALSE
             for (int x = 0; x < G_R.nao_terminais.size(); x++) { //PERCORRE TODAS NAO TERMINAIS
                 if (G_R.nao_terminais.get(x).contains(argumento)) { //COMPARA SE O USUARIO DIGITOU UMA NAO-TERMINAL REPETIDA
@@ -99,9 +99,14 @@ public class AFD_GR {
                 System.out.println("\nInserido com sucesso!\n"); //INTERACAO COM O USUARIO
             }
             //argumento = scan.next();
+        }*/
+        
+        for(int i = 0; i < term.length;i++){
+             argumento = String.valueOf(term[i]);
+             G_R.nao_terminais.add(argumento);
+             G_R.conj_regras.add(new Regras());
+             alfa = alfa + argumento;
         }
-        
-        
         
         System.out.println("Informe as variaveis terminais \n(adicione cada uma com enter ao fim) \n digite @ para avancar: "); //INTERACAO COM O USUARIO
         argumento = scan.next();
