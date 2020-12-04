@@ -32,14 +32,14 @@ public class AFD {
     // DADOS INSERIDOS PELO USUARIO
     public void iniciaAFD(){ // Função para a configuração do Autômato Finito Determinístico
         System.out.println("Digite o alfabeto?");
-        this.alfabeto ="01"; //in.nextLine();
+        this.alfabeto = in.nextLine();
         this.alf = this.alfabeto.toCharArray();
         
         //dados.setAlfabeto(alf);
                
                     // ESTADO INICIAL EX: A
         System.out.println("Digite o estado inicial?");
-        this.estinicial = "a";//in.nextLine();
+        this.estinicial = in.nextLine();
         this.ini = this.estinicial.charAt(i);
         this.atual = this.ini;
                     // ESTADO FINAL PODE SER MAIS DE UM EX: BC
@@ -49,12 +49,12 @@ public class AFD {
                     // FUNÇOES DE TRANSIÇÃO DE ESTADOS
                     // EX: A0B    ESTADO ATUAL: A  VALOR DA TRANSIÇÃO: 0 PROX. ESTADO: B
         System.out.println("Digite as transiçoes de estado separando por ',' uma da outra?");
-        funcoes ="a0b,a1c,b1c,b0d,c0b,c1d,d0d,d1d"; //in.nextLine();
+        funcoes =in.nextLine();
                
         String transicao[] = funcoes.split(",");
                 // PALAVRA PARA TESTAR O AUTOMATO
         System.out.println("Digite a palavra para testar o automato?");
-        palavra = "0110";//in.nextLine();
+        palavra = in.nextLine();
         pal = palavra.toCharArray();
         
         char processo[][];// Matriz gerada para passar como paramentro na função Reconhecer.

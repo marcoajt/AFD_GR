@@ -18,7 +18,7 @@ public class AFD_GR{
         Scanner scan = new Scanner(System.in);
         
         System.out.println("Digite os estados");
-        String est ="abcd"; //scan.nextLine();
+        String est =scan.nextLine();
         estados = est.toCharArray();
         
         meuAFD.iniciaAFD();
