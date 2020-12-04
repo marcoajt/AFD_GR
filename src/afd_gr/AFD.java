@@ -1,24 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package afd_gr;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- *
- * @author marco
- */
 public class AFD {
     private    Scanner in = new Scanner(System.in);
     private    String palavra;
     private   String alfabeto;      
     private   String funcoes;
     private   int cont=0;
-    private   char alf []; 
+    private char alf []; 
     private   char pal [];
     private   String estinicial;
     private   String estfinal;
@@ -34,40 +24,44 @@ public class AFD {
     private boolean rec;
     
     //Conversion dados = new Conversion();
+
+    public AFD() {
+    }
       
+        
     // DADOS INSERIDOS PELO USUARIO
     public void iniciaAFD(){ // Função para a configuração do Autômato Finito Determinístico
         System.out.println("Digite o alfabeto?");
-        this.alfabeto = in.nextLine();
+        this.alfabeto ="01"; //in.nextLine();
         this.alf = this.alfabeto.toCharArray();
         
         //dados.setAlfabeto(alf);
                
                     // ESTADO INICIAL EX: A
         System.out.println("Digite o estado inicial?");
-        this.estinicial = in.nextLine();
+        this.estinicial = "a";//in.nextLine();
         this.ini = this.estinicial.charAt(i);
         this.atual = this.ini;
                     // ESTADO FINAL PODE SER MAIS DE UM EX: BC
         System.out.println("Digite o estado final?");
-        estfinal = in.nextLine();
+        estfinal = "d"; //in.nextLine();
         estfim = estfinal.toCharArray();
                     // FUNÇOES DE TRANSIÇÃO DE ESTADOS
                     // EX: A0B    ESTADO ATUAL: A  VALOR DA TRANSIÇÃO: 0 PROX. ESTADO: B
         System.out.println("Digite as transiçoes de estado separando por ',' uma da outra?");
-        funcoes = in.nextLine();
+        funcoes ="a0b,a1c,b1c,b0d,c0b,c1d,d0d,d1d"; //in.nextLine();
                
         String transicao[] = funcoes.split(",");
                 // PALAVRA PARA TESTAR O AUTOMATO
         System.out.println("Digite a palavra para testar o automato?");
-        palavra = in.nextLine();
+        palavra = "0110";//in.nextLine();
         pal = palavra.toCharArray();
         
         char processo[][];// Matriz gerada para passar como paramentro na função Reconhecer.
         
         processo = organiza(transicao);//Retorna a matriz gerada na função organiza.
         
-        Reconhecer(pal,processo);
+        rec=Reconhecer(pal,processo);
         mataux = processo;
     }
     
@@ -95,7 +89,7 @@ public class AFD {
                return mat;
     }
     
-    boolean Reconhecer(char palavra[], char mat[][]){//Função onde será realizado as transições, e retorna true: reconhecida e false: não reconhecida
+    public boolean Reconhecer(char palavra[], char mat[][]){//Função onde será realizado as transições, e retorna true: reconhecida e false: não reconhecida
         cont = 0;
         int n = 0;
         int x = 0;
@@ -193,6 +187,9 @@ public class AFD {
     public char[][] getMat() {
         return mataux;
     }
-    
+
+    public boolean isRec() {
+        return rec;
+    }
     
 }
