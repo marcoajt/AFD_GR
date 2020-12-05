@@ -176,12 +176,18 @@ public class AFD_GR{
                         System.out.println("\nSimbolo invalido!\n"); //INTERACAO COM O USUARIO
                     }
                     if(vazio==-1)break;//ADICIONA A REGRA VAZIA E FINALIZA O PREENCHIMENTO DAS REGRAS
-                    argumento = arg[j][k];
+                    
                     //TESTE PARA VER SE É A ULTIMA REGRA
                     vazio++;
-                    if(meuAFD.getMat().length==vazio){
+                    argumento = arg[j][k];
+                    
+                    if(meuAFD.getMat().length>=vazio){
                         vazio=-1;
                         argumento="&"; 
+                        //consigui adicionar um simbulo vazio se o automato alguma transição no do estado final para algum estado
+                        //mas se o estado final não aparece em nenhuma transição não as regras são geradas de forma errada
+                        if(arg[j][k-1]==String.valueOf(meuAFD.getEstfim())){
+                            
                     }
                 }
                 
