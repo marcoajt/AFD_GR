@@ -44,7 +44,7 @@ public class AFD {
         this.atual = this.ini;
                     // ESTADO FINAL PODE SER MAIS DE UM EX: BC
         System.out.println("Digite o estado final?");
-        estfinal = "d"; //in.nextLine();
+        estfinal =in.nextLine();
         estfim = estfinal.toCharArray();
                     // FUNÇOES DE TRANSIÇÃO DE ESTADOS
                     // EX: A0B    ESTADO ATUAL: A  VALOR DA TRANSIÇÃO: 0 PROX. ESTADO: B
