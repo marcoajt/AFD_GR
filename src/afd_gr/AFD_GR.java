@@ -127,6 +127,7 @@ public class AFD_GR{
             int i,j,k; 
             i=j =k =0; //DEFINE A VARIAVEL EM 0
             String[][] arg =preRegras(meuAFD.getMat());
+            int vazio=0;
             
             do {
                 //System.out.println("Informe as regras para a variavel nao-terminal |" + G_R.nao_terminais.get(i) + "| \n A gramatica regular deve ser linear a esquerda ou a direita\nPara usar o vazio utilize o simbolo '&' \n (adicione cada uma com enter ao fim) \n digite @ para avancar: "); //INTERACAO COM O USUARIO
@@ -170,17 +171,24 @@ public class AFD_GR{
                     if (cont_0 == cont_regra_0.length && cont_1 < 2 && caso_do_meio == false) { //CASO SEJA CONT_0 IGUAL O TAMANHO DA PALAVRA DIGITADA SIGNIFICA QUE TODOS CARACTERES PERTENCEM AO ALFABETO QUE FOI GERADO, CASO CONT_1 DEMONSTRE QUE HA MENOS DE DUAS NAO-TERMINAIS NO TERMO E CASO NAO HAJA NENHUMA QUEBRA DE LINEARIDADE ENTAO O PROCESSO SEGUE
                         k++; //SOMA PARA SEGUIR NA CRIAÇÃO DAS REGRAS
                         G_R.conj_regras.get(i).derivacoes.add(argumento); //A REGRA E ADICIONADA NA LISTA DE REGRAS
-                        System.out.println("\nInserido com sucesso!\n"); //INTERACAO COM O USUARIO
+                       // System.out.println("\nInserido com sucesso!\n"); //INTERACAO COM O USUARIO
                     } else {
                         System.out.println("\nSimbolo invalido!\n"); //INTERACAO COM O USUARIO
                     }
-                    argumento = arg[j][k]; 
+                    if(vazio==-1)break;//ADICIONA A REGRA VAZIA E FINALIZA O PREENCHIMENTO DAS REGRAS
+                    argumento = arg[j][k];
+                    //TESTE PARA VER SE É A ULTIMA REGRA
+                    vazio++;
+                    if(meuAFD.getMat().length==vazio){
+                        vazio=-1;
+                        argumento="&"; 
+                    }
                 }
                 
                 j++;//SOMA PARA A PROXIMA REGRA
                 i++; // SOMA O CONTADOR PARA AVANCAR PARA OUTRA NAO TERMINAL
             } while (i < G_R.conj_regras.size());
-
+            
 
             //EXIBIÇÃO
             System.out.println("Regras:"); //INTERACAO COM O USUARIO
