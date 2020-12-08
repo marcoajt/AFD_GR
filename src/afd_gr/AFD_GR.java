@@ -220,13 +220,14 @@ public class AFD_GR{
                     else{argumento = rand_root();}
                 }
             }
-
+            
             cachorro.GerarPalavras();
             cachorro.Ordenador2();
             cachorro.Mostra_Todas();
             //cachorro.Ordenador();
             cachorro.GerarPalavras();
-       }
+            trans.finais(cachorro.getTodas_palavras());
+        }
        else{
            System.out.println("ERRO: Tente outras entradas");
        }

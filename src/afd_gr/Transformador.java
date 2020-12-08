@@ -152,4 +152,19 @@ public class Transformador {
             return meuAFD.isRec();
         }
   
+     public void finais(ArrayList<String> palavras){
+         String aux;
+         for(int i=0;i<palavras.size();i++){
+             aux=palavras.get(i);
+             System.out.println(aux.toCharArray());
+             if(meuAFD.Reconhecer(aux.toCharArray(), meuAFD.getMat())){
+             System.out.println("APROVADO ");
+         }
+         }
+         for(int i=0;i<2;i++){
+             for(int j=0;j<3;j++){
+                 //System.out.print(ConfigGR_conj_regras.get(j).derivacoes.toString());
+             }System.out.println();
+         }
+     }
 }

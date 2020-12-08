@@ -9,6 +9,14 @@ public class Gerador {
     private ArrayList<String> todas_palavras = new ArrayList<String>();
     public int qtd;
 
+    public ArrayList<String> getTodas_palavras() {
+        return todas_palavras;
+    }
+
+    public ArrayList<String> getPalavras_finais() {
+        return palavras_finais;
+    }
+
     public Gerador(){
     }
 
