@@ -23,6 +23,14 @@ public class AFD_GR{
         
         meuAFD.iniciaAFD();
         
+        Transformador trans = new Transformador();
+        
+        trans.setNão_terminais(estados);
+        trans.setTerminais(meuAFD.getAlf());
+        trans.setRegras(meuAFD.getMat());
+        trans.setEstado_inicial(meuAFD.getIni());
+        trans.setEstado_final(meuAFD.getFim());
+        
         char [] nao_terminais = estados;
         char [] terminais=meuAFD.getAlf();
         
