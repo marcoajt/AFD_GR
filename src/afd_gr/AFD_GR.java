@@ -9,32 +9,16 @@ public class AFD_GR{
 
     static Gramatica_Regular G_R = new Gramatica_Regular(); //VARIAVEL QUE CONTEM LISTAS COM AS VARIAVEIS TERMINAIS, NAO-TERMINAIS E CONJUNTOS DE REGRAS PARA CADA NAO TERMINAL
     static Gerador cachorro = new Gerador();
-    static AFD meuAFD = new AFD();
-    static char estados [];
+    
     
     static int infinity; //VARIAVEL USADA PARA REALIZAR VERIFICACAO DE EXCECOES
     
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
-        System.out.println("Digite os estados");
-        String est =scan.nextLine();
-        estados = est.toCharArray();
-        
-        meuAFD.iniciaAFD();
-        
         Transformador trans = new Transformador();
         
-        trans.setNão_terminais(estados);
-        trans.setTerminais(meuAFD.getAlf());
-        trans.setRegras(meuAFD.getMat());
-        trans.setEstado_inicial(meuAFD.getIni());
-        trans.setEstado_final(meuAFD.getFim());
-        
-        char [] nao_terminais = estados;
-        char [] terminais=meuAFD.getAlf();
-        
-        if(meuAFD.isRec()){
+        if(trans.afdConfirm()){
             String argumento; //VARIAVEL USADA PARA INTERAGIR COM O USUARIO
             //Scanner scan = new Scanner(System.in); //VARIAVEL USADA PARA INTERAGIR COM O USUARIO
             String alfa = new String(); //VARIAVEL USADA PARA GUARDAR O ALFABETO COMPLETO CONTENDO VARIAVEIS TERMINAIS E NAO-TERMINAIS
@@ -46,10 +30,9 @@ public class AFD_GR{
             int cont_0; //VARIAVEL USADA PARA REALIZAR VERIFICACAO DE EXCECOES
             int cont_1; //VARIAVEL USADA PARA REALIZAR VERIFICACAO DE EXCECOES
             int n, automatico=2; //INICIALIZA PARA EFETURAR A DERIVAÇÃO DE OUTRA PALAVRA
-
-
-
-
+            G_R.nao_terminais=trans.getConfigGR_não_terminais();
+            G_R.terminais=trans.getConfigGR_terminais();
+            G_R.conj_regras=trans.getConfigGR_conj_regras();
             alfa = alfa + "&"; //DEFININDO QUE O PRIMEIRO ELEMENTO DO ALFABETO É O VAZIO
 
             System.out.println("\nDigite a quantidade de palavras: ");  
@@ -85,7 +68,7 @@ public class AFD_GR{
                     System.out.println("\nInserido com sucesso!\n"); //INTERACAO COM O USUARIO
                 }
                 //argumento = scan.next();
-            }*/
+            }
 
             for(int i = 0; i < nao_terminais.length;i++){
                  argumento = String.valueOf(nao_terminais[i]);
@@ -93,7 +76,7 @@ public class AFD_GR{
                  G_R.conj_regras.add(new Regras());
                  alfa = alfa + argumento;
             }
-
+            
             //System.out.println("Alfabeto terminais: "); //INTERACAO COM O USUARIO
             //argumento = scan.next();
 
@@ -102,7 +85,7 @@ public class AFD_GR{
                  G_R.terminais.add(argumento);
                  alfa = alfa + argumento;
             }
-
+*/
             /*while (!"@".equals(argumento)) { //ENQUANTO O USUARIO NAO DIGITAR @ CONTINUARA NA INSERCAO DE VARIAVEIS TERMINAIS
                 verificador = false; //VARIAVEL TODA VEZ QUE ENTRA NESSA FUNCAO É DEFINIDA EM FALSE
                 for (int x = 0; x < G_R.nao_terminais.size(); x++) { //PERCORRE TODAS NAO TERMINAIS
@@ -130,17 +113,17 @@ public class AFD_GR{
                 argumento = scan.next();
             }*/
 
-            cont_alfa = alfa.toCharArray(); //PASSA A STRING DO ALFABETO PARA O FORMATO ARRAY
-
+            //cont_alfa = alfa.toCharArray(); //PASSA A STRING DO ALFABETO PARA O FORMATO ARRAY
+            cont_alfa = trans.getGR_alfa().toCharArray();
+            
+            
             int i,j,k; 
-            i=j =k =0; //DEFINE A VARIAVEL DO CONJUNTO DE NÃO-TERMINAL EM 0
-            String[][] arg =preRegras(meuAFD.getMat()); //SEPARA A MATRIZ DE TRANSIÇÕES EM UMA MELHOR MANIPULAVEL NA CRIAÇÃO DAS REGRAS
-            
-            
+            i=j =k =0; //DEFINE A VARIAVEL DO CONJUNTO DE NÃO-TERMINAL EM 0            
+            /*
             do {
                 //System.out.println("Informe as regras para a variavel nao-terminal |" + G_R.nao_terminais.get(i) + "| \n A gramatica regular deve ser linear a esquerda ou a direita\nPara usar o vazio utilize o simbolo '&' \n (adicione cada uma com enter ao fim) \n digite @ para avancar: "); //INTERACAO COM O USUARIO
                 k=0;
-                argumento = arg[i][k]; 
+                //argumento = 
                 while (!"@".equals(argumento)) { //ENQUANTO O USUARIO NAO DIGITAR @ CONTINUARA NA INSERCAO DE REGRAS
                     cont_0 = 0; //VARIAVEL USADA PARA VERIFICACAO DE EXCECAO
                     cont_1 = 0; //VARIAVEL USADA PARA VERIFICACAO DE EXCECAO
@@ -186,12 +169,13 @@ public class AFD_GR{
                     
                     //TESTE PARA VER SE É A ULTIMA REGRA
                     //vazio++;
-                    argumento = arg[i][k];
+                    argumento = trans.getConfigGR_conj_regras().get(i).derivacoes.get(k);
               }
                 i++; // SOMA O CONTADOR PARA AVANCAR PARA OUTRA NAO TERMINAL
             } while (i < G_R.conj_regras.size());
             
-
+           
+*/
             //EXIBIÇÃO
             System.out.println("Regras:"); //INTERACAO COM O USUARIO
             for (int x = 0; x < G_R.conj_regras.size(); x++) { //PERCORRE TODOS CONJUNTOS DE REGRAS
@@ -207,7 +191,7 @@ public class AFD_GR{
                 System.out.print(cont_alfa[x] + " - "); //INTERACAO COM O USUARIO
             }
             System.out.println("\n");
-
+            argumento="a";
             if(automatico == 1){
                 System.out.println("Informe o simbolo inicial (raiz) para gerar aleatoriamente uma palavra pertencente a esta gramatica regular \n (adicione com enter ao fim) \n digite @ para finalizar: "); //INTERACAO COM O USUARIO
                 argumento = scan.next();
@@ -236,6 +220,7 @@ public class AFD_GR{
                     else{argumento = rand_root();}
                 }
             }
+
             cachorro.GerarPalavras();
             cachorro.Ordenador2();
             cachorro.Mostra_Todas();
@@ -309,26 +294,6 @@ public class AFD_GR{
     public static String rand_root(){
         Random gato = new Random();
         return G_R.nao_terminais.get(gato.nextInt(G_R.nao_terminais.size()));
-    }
-        
-    public static String[][] preRegras(char[][] mat){
-        String[][] fim=new String[estados.length*2][meuAFD.getMat().length*2];
-        int k=0,i,j;
-        for(i=0;i<estados.length;i++){ //separa os estados
-            k=0;
-            for(j=0;j<mat.length;j++){ //verifica o tamnho 
-                if(G_R.nao_terminais.get(i).equals(String.valueOf(mat[j][0]))){
-                    fim[i][k]=String.valueOf(mat[j][1])+String.valueOf(mat[j][2]); // ESTRAI A REGRA PARA O NÃO TERMINAL NA ORDEM ADICIONADA
-                     k++;
-                }                
-            }  if(G_R.nao_terminais.get(i).equals(String.valueOf(meuAFD.getEstfim()))){ 
-                //TESTA SE O NÃO TERMINAL É FINAL E JÁ FORAM ESTRAIDAS SUAS TRANSIÇÕES (CASO TENHA)
-                    fim[i][k]="&"; k++;
-                }
-            fim[i][k]="@";
-        }
-        
-        return fim;
     }
         
     }

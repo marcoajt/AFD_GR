@@ -55,7 +55,7 @@ public class Gerador {
         if((palavra.toLowerCase()==palavra)&&(!palavra.isEmpty())){
             this.palavras_finais.add(palavra);
             this.qtd = qtd - 1;
-            System.out.print("-> Gerou!\n");
+            System.out.print("-> Gerou!\n" );
         }
     } 
     

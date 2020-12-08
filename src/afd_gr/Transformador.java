@@ -2,27 +2,78 @@
 package afd_gr;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Transformador {
-    char estado_inicial;
-    //char [] estado_final;
-    char estado_final;
-    char [] não_terminais; //VÃO RECEBER OS ESTADOS DA AFD
-    char [] terminais; //VÃO RECEBER ALFABETO DO AFD
-    char [][] regras; //VÃO RECEBER AS TRANSIÇÕES DO AFD
-    String argumento;//ARGUMENTO USADO NA GR
-    String GR_alfa;
+    private AFD meuAFD=new AFD();
+    private String estados;
     
-    ArrayList<String> ConfigGR_não_terminais;
-    ArrayList<String> ConfigGR_terminais;
-    ArrayList<Regras> ConfigGR_conj_regras;
+    private char estado_inicial;
+    //char [] estado_final;
+    private char estado_final;
+    private char [] não_terminais; //VÃO RECEBER OS ESTADOS DA AFD
+    private char [] terminais; //VÃO RECEBER ALFABETO DO AFD
+    private char [][] regras; //VÃO RECEBER AS TRANSIÇÕES DO AFD
+    private String argumento;//ARGUMENTO USADO NA GR
+    private String GR_alfa;
+    
+    
+    private List<String> ConfigGR_não_terminais=new ArrayList<>();
+    private List<String> ConfigGR_terminais=new ArrayList<>();;
+    private List<Regras> ConfigGR_conj_regras=new ArrayList<>();; //ISSO SERA UTILIZADO NA CLASSE Gramatica Regular
 
+    
+    public Transformador() {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Digite todos os estados (sem espaço): ");
+        String est =scan.nextLine();
+        estados = est;
+        meuAFD.iniciaAFD();        
+        GR_alfa="&";
+        setNão_terminais(estados.toCharArray());
+        setTerminais(meuAFD.getAlf());
+      //  setRegras(meuAFD.getMat());
+      configuração_gr();  
+      regras(meuAFD.getMat());
+        setEstado_inicial(meuAFD.getIni());
+        setEstado_final(meuAFD.getFim());        
+    }
+    
+    public void regras(char[][] mat){
+        String[][] fim=new String[não_terminais.length*2][meuAFD.getMat().length*2];
+        List<String> preRegras=new ArrayList<>();
+        int k=0,i,j;
+        for(i=0;i<não_terminais.length;i++){ //separa os estados
+            k=0;
+            for(j=0;j<mat.length;j++){ //verifica o tamnho 
+                if(ConfigGR_não_terminais.get(i).equals(String.valueOf(mat[j][0]))){
+                    fim[i][k]=String.valueOf(mat[j][1])+String.valueOf(mat[j][2]); // ESTRAI A REGRA PARA O NÃO TERMINAL NA ORDEM ADICIONADA
+                     k++;
+                }                
+            } 
+            if(ConfigGR_não_terminais.get(i).equals(String.valueOf(meuAFD.getEstfim()))){ 
+                //TESTA SE O NÃO TERMINAL É FINAL E JÁ FORAM ESTRAIDAS SUAS TRANSIÇÕES (CASO TENHA)
+                    fim[i][k]="&"; k++;
+                }
+            fim[i][k]="@";
+            
+            for(int l=0;l<k;l++){
+                ConfigGR_conj_regras.get(i).derivacoes.add(fim[i][l]);
+            }            
+        }        
+    }
+    
     public char[] getNão_terminais() {
         return não_terminais;
     }
 
     public void setNão_terminais(char[] não_terminais) {
         this.não_terminais = não_terminais;
+    }
+
+    public List<String> getConfigGR_terminais() {
+        return ConfigGR_terminais;
     }
 
     public char[] getTerminais() {
@@ -70,11 +121,11 @@ public class Transformador {
         return GR_alfa;
     }
 
-    public ArrayList<String> getConfigGR_não_terminais() {
+    public List<String> getConfigGR_não_terminais() {
         return ConfigGR_não_terminais;
     }
 
-    public ArrayList<Regras> getConfigGR_conj_regras() {
+    public List<Regras> getConfigGR_conj_regras() {
         return ConfigGR_conj_regras;
     }
     
@@ -95,28 +146,10 @@ public class Transformador {
             ConfigGR_terminais.add(argumento);
             GR_alfa = GR_alfa + argumento;
         }
-        
-        String[][] arg = preRegras(regras);
     }
     
-    
-    public String [][] preRegras(char[][] mat){
-        String[][]fim = new String[não_terminais.length * 2][regras.length * 2];
-        int k = 0,i,j;
-        for(i = 0;i < não_terminais.length;i++){
-            k = 0;
-            for(j = 0;j < mat.length; j++){
-                if(ConfigGR_não_terminais.get(i).equals(String.valueOf(mat[j][0]))){
-                    fim[i][k] = String.valueOf(mat[j][1]) + String.valueOf(mat[j][2]);
-                    k++;
-                }
-            }
-            if(ConfigGR_não_terminais.get(i).equals(String.valueOf(estado_final))){
-                fim[i][k] = "&";
-                k++;
-            }
-            fim[i][j] = "@";
+     public boolean afdConfirm(){
+            return meuAFD.isRec();
         }
-        return fim;
-    }
+  
 }
